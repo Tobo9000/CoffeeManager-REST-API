@@ -21,8 +21,8 @@ exports.order_get_all = (req, res) => {
 exports.order_post_add = (req, res) => {
     const order = new Order({
         _id: new mongoose.Types.ObjectId(),
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        comment: req.body.comment,
+        date: req.body.date,
         amount: req.body.amount
     });
 
