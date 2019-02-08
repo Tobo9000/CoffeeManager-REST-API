@@ -45,19 +45,19 @@ exports.user_post_sign_up = (req, res) => {
 
 exports.user_post_login = (req, res) => {
     User.findOne({ email: req.body.email }).then(user => {
-        if(user){
-            bcrypt.compare(req.body.password, user.password, function(err, result) {
-                if(err){
-                    res.status(401).json(error);
-                }
-                else{
-                    res.status(200).json(result);
-                }
-            });
-        }
-        else{
-            res.status(404).json({message: "User not found"});
-        }
+        bcrypt.compare(req.body.password, user.password, (error, result) => {
+            if(error) {
+                res.status(401).json({ error: "Unauthorized" });
+            } else {
+                user = user.toObject();
+                delete user.__v;
+                delete user.password;
+                const token = jwt.sign(user, JWT_PRIVATE_KEY, { expiresIn: JWT_EXPIRATION_TIME });
+                res.status(200).json({Success: {message: "Anmeldung erfolgreich.", token: token}});
+            }
+        });
+    }, error => {
+        return res.status(500).json(error);
     });
 }
 
