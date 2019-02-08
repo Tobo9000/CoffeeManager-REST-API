@@ -34,3 +34,15 @@ exports.order_post_add = (req, res) => {
         res.status(500).json(error);
     });
 }
+
+exports.order_post_change = async (req, res) => {
+    // await Order.updateOne({ _id: req.body._id }) 
+    // try {
+    //     const test = await Order.updateOne({ _id: req.body._id }, req);      
+    //     res.status(200).json({
+    //         message: test
+    //     })
+    // } catch(Error) {
+    //     console.log(Error)
+    // }
+}

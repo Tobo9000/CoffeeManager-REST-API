@@ -8,4 +8,6 @@ router.post('/addOrder', OrderController.order_post_add);
 
 router.delete('/deleteItem/:id', OrderController.order_delete_by_id);
 
+router.post('/changeOrder', OrderController.order_post_change);
+
 module.exports = router;
